@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragonpass | Manager Bootcamp Facilitator Brief</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --dp-dark: #0A2333;
+            --dp-slate: #134A61;
+            --dp-accent: #FA4A3D;
+        }
+
+        html {
+            scroll-behaviour: smooth;
+        }
+
+        body {
+            background-color: var(--dp-dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            scroll-behaviour: smooth;
+            overflow-x: hidden;
+        }
+
+        .text-accent { color: var(--dp-accent); }
+        .bg-accent { background-color: var(--dp-accent); }
+
+        .nav-logo { height: 32px; width: auto; object-fit: contain; }
+        .hero-logo { width: 100%; max-width: 400px; height: auto; object-fit: contain; margin-bottom: 2rem; }
+
+        /* Bilingual Styling */
+        .cn-sub {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 300;
+            opacity: 0.5;
+            letter-spacing: 0.2em;
+            margin-top: 0.5rem;
+        }
+
+        /* Impact Scrubber */
+        #impact-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #impact-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--dp-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--dp-accent);
+        }
+
+        /* Core Muscle Hover Effect */
+        .muscle-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .muscle-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--dp-accent);
+            background: rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Structure Styling */
+        .sprint-container {
+            position: relative;
+            padding: 40px 30px;
+            border: 1px dashed rgba(255,255,255,0.15);
+            border-radius: 24px;
+            background: rgba(255,255,255,0.01);
+        }
+
+        .cycle-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dp-accent);
+            padding: 4px 20px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            box-shadow: 0 4px 15px rgba(250, 74, 61, 0.3);
+            z-index: 10;
+        }
+
+        .structure-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 24px;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+
+        .active-card {
+            border-color: var(--dp-accent);
+            background: rgba(250, 74, 61, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            margin-top: 40px;
+        }
+
+        #progress-bar {
+            position: absolute;
+            height: 100%;
+            background: var(--dp-accent);
+            width: 0%;
+            box-shadow: 0 0 10px var(--dp-accent);
+        }
+
+        /* Module 01 Series */
+        .series-panel {
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+            padding: 1rem 1.1rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 1rem;
+            background: rgba(255,255,255,0.02);
+            transition: all 0.25s ease;
+        }
+
+        .resource-link:hover {
+            border-color: rgba(250, 74, 61, 0.45);
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-2px);
+        }
+
+        .resource-link__icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(250, 74, 61, 0.12);
+            color: var(--dp-accent);
+            flex-shrink: 0;
+        }
+
+        .resume-btn {
+            width: 100%;
+            padding: 0.95rem 1rem;
+            border-radius: 0.9rem;
+            border: 1px solid rgba(250, 74, 61, 0.28);
+            background: rgba(250, 74, 61, 0.08);
+            color: white;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .resume-btn:hover {
+            background: rgba(250, 74, 61, 0.14);
+            border-color: rgba(250, 74, 61, 0.45);
+        }
+
+        .video-card {
+            text-align: left;
+            width: 100%;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.015) 100%);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(250, 74, 61, 0.35);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
+
+        .video-card__top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .video-card__icon {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(250, 74, 61, 0.12);
+            color: var(--dp-accent);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .video-card__meta {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.35);
+            font-weight: 700;
+        }
+
+        .video-card__title {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.3;
+        }
+
+        .video-card__desc {
+            display: block;
+            color: #9ca3af;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .video-card__status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            width: fit-content;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(255,255,255,0.38);
+            font-weight: 700;
+            padding-top: 0.25rem;
+        }
+
+        .video-card.is-watched {
+            border-color: rgba(250, 74, 61, 0.38);
+            background: linear-gradient(180deg, rgba(250, 74, 61, 0.08) 0%, rgba(255,255,255,0.02) 100%);
+        }
+
+        .video-card.is-watched .video-card__status {
+            color: rgba(250, 74, 61, 0.88);
+        }
+
+        .sub-video::before {
+            content: "Part of Triangle of Expectations";
+            display: block;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(250,74,61,0.8);
+            margin-bottom: 0.35rem;
+            font-weight: 700;
+        }
+
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .video-modal.hidden {
+            display: none;
+        }
+
+        .video-modal__backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(3, 9, 14, 0.82);
+            backdrop-filter: blur(10px);
+        }
+
+        .video-modal__dialog {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1040px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #071620;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+
+        .video-modal__header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .video-modal__close {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .video-modal__close:hover {
+            border-color: rgba(250,74,61,0.35);
+            color: var(--dp-accent);
+        }
+
+        .video-modal__body {
+            padding: 1.25rem 1.5rem 1.5rem;
+        }
+
+        .video-embed-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: #02070b;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .video-embed-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .modal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+            border-radius: 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn--primary {
+            background: var(--dp-accent);
+            color: white;
+            border: 1px solid var(--dp-accent);
+        }
+
+        .modal-btn--primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .modal-btn--secondary {
+            background: rgba(255,255,255,0.03);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .modal-btn--secondary:hover {
+            border-color: rgba(250,74,61,0.35);
+            color: var(--dp-accent);
+        }
+
+        .progress-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 9999px;
+            padding: 0.55rem 0.95rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.02);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .scroll-indicator { animation: bounce 2s infinite; }
+
+        @media (max-width: 768px) {
+            .video-modal {
+                padding: 1rem;
+            }
+
+            .video-modal__header,
+            .video-modal__body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased font-[400]">
+
+    <!-- Navigation -->
+    <nav class="p-6 flex justify-between items-center sticky top-0 bg-[#0A2333]/95 backdrop-blur-md z-50 border-b border-white/10">
+        <img src="https://lh3.googleusercontent.com/d/1rBp_LTJuenhQflR1woUzA6Ep4e_jWw7I" alt="Dragonpass Logo" class="nav-logo">
+        <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <a href="#gap" class="hover:text-accent transition">The Gap</a>
+            <a href="#modules" class="hover:text-accent transition">Muscles</a>
+            <a href="#module-01-series" class="hover:text-accent transition">Module 01</a>
+            <a href="#structure" class="hover:text-accent transition">Structure</a>
+            <a href="https://dragonpassuk-my.sharepoint.com/:b:/g/personal/gareth_ogden_dragonpass_com/IQAXqR34ZEAsQbupRmL1tgxtAfK8FEdnmBH0YfuiO4Q_vw4?e=VX5Huo" target="_blank" rel="noopener noreferrer" class="text-accent underline decoration-2 underline-offset-4">White Paper</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="relative min-h-[90vh] flex flex-col items-center justify-center px-6 text-center">
+        <img src="https://lh3.googleusercontent.com/d/1vpIwCYBeUexg-kAbqLLRV5_j23dIRRDM" alt="Dragonpass Full Logo" class="hero-logo">
+        <h1 class="text-5xl md:text-8xl font-800 mb-8 leading-tight tracking-tight">Manager <span class="text-accent">Bootcamp</span></h1>
+        <p class="text-base md:text-2xl text-gray-300 mb-2 font-light max-w-3xl mx-auto leading-relaxed">Building the Manager Muscle that matters.</p>
+        <p class="text-xs md:text-sm text-white/30 tracking-[0.3em] font-light uppercase">锻造至关重要的管理基石</p>
+        <div class="absolute bottom-10 flex flex-col items-center gap-2 text-gray-500">
+            <span class="text-[10px] font-bold uppercase tracking-widest">Scroll to explore</span>
+            <i class="fa-solid fa-chevron-down scroll-indicator text-accent"></i>
+        </div>
+    </header>
+
+    <!-- 1. The Management Gap -->
+    <section id="gap" class="py-32 px-6 bg-white/[0.02]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-800 mb-6 tracking-tight">The Management Gap <span class="cn-sub">管理效能差距</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+                    Management is our single biggest lever for organisational performance. Use the scrubber to see the impact of management friction.
+                </p>
+                <div class="bg-white/5 p-8 md:p-12 rounded-3xl border border-white/10 mb-8 max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                        <div class="text-center">
+                            <div id="stat-1" class="text-5xl md:text-6xl font-800 text-accent">0%</div>
+                            <p class="text-[10px] uppercase font-bold tracking-widest mt-2 opacity-50">Feedback Friction</p>
+                        </div>
+                        <div class="text-center">
+                            <div id="stat-2" class="text-5xl md:text-6xl font-800 text-accent">0%</div>
+                            <p class="text-[10px] uppercase font-bold tracking-widest mt-2 opacity-50">Employee Overwhelm</p>
+                        </div>
+                        <div class="text-center">
+                            <div id="stat-3" class="text-5xl md:text-6xl font-800 text-accent">0%</div>
+                            <p class="text-[10px] uppercase font-bold tracking-widest mt-2 opacity-50">Manager-Led Attrition</p>
+                        </div>
+                    </div>
+                    <input type="range" id="impact-slider" min="0" max="100" value="0" class="cursor-pointer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. The Trailer -->
+    <section id="video" class="py-24 px-6 bg-[#081b27]">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+                <h2 class="text-3xl font-700 text-accent">The Trailer <span class="cn-sub text-white/40">项目预告片</span></h2>
+                <div class="h-px flex-grow bg-white/10 mx-8 hidden md:block"></div>
+                <div class="text-gray-500 font-mono text-xs tracking-widest uppercase">Duration: 01:08</div>
+            </div>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                <iframe src="https://drive.google.com/file/d/1dC1rREoBJPjnQ76hxgu9zkv_Bza2d_Fy/preview"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"
+                        allow="autoplay; fullscreen"
+                        webkitallowfullscreen
+                        mozallowfullscreen
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. The Core Muscles -->
+    <section id="modules" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-800 mb-6 tracking-tight">The Core Muscles <span class="cn-sub">核心管理素质</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">Three modules connected by a single vehicle: <span class="text-white font-semibold italic">One-to-Ones</span>.</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-10">
+                <div class="muscle-card bg-white/5 p-10 rounded-2xl flex flex-col h-full">
+                    <div class="text-accent font-800 mb-8">01</div>
+                    <h3 class="text-2xl font-700 mb-6 leading-tight">Defining & Setting Expectations</h3>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed font-light flex-grow">Eliminating ambiguity through Role Maturity Assessments and the Triad of Expectations.</p>
+                    <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-microchip text-accent/60"></i> Maturity Diagnostics</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-robot text-accent/60"></i> AI KSB Calibration</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-compass text-accent/60"></i> The OCT Framework</div>
+                    </div>
+                </div>
+                <div class="muscle-card bg-white/5 p-10 rounded-2xl flex flex-col h-full">
+                    <div class="text-accent font-800 mb-8">02</div>
+                    <h3 class="text-2xl font-700 mb-6 leading-tight">Productive Conversations</h3>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed font-light flex-grow">Reframing difficult meetings into objective performance dialogues linked to pre-set standards.</p>
+                    <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-accent/60"></i> Conflict Neutralisation</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-bolt text-accent/60"></i> High-Utility Feedback</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-gauge-high text-accent/60"></i> Performance Steering</div>
+                    </div>
+                </div>
+                <div class="muscle-card bg-white/5 p-10 rounded-2xl flex flex-col h-full">
+                    <div class="text-accent font-800 mb-8">03</div>
+                    <h3 class="text-2xl font-700 mb-6 leading-tight">High Performing Teams</h3>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed font-light flex-grow">Moving beyond professional politeness to build vulnerability-based trust and peer accountability.</p>
+                    <div class="space-y-4 pt-6 border-t border-white/5 text-xs font-medium text-gray-300">
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-handshake-angle text-accent/60"></i> Vulnerability-Based Trust</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-fire-flame-curved text-accent/60"></i> Healthy Ideological Conflict</div>
+                        <div class="flex items-center gap-3"><i class="fa-solid fa-users-viewfinder text-accent/60"></i> Peer-to-Peer Accountability</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Module 01 Video Series -->
+    <section id="module-01-series" class="py-32 px-6 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-800 mb-6 tracking-tight">
+                    Module 01 Video Series <span class="cn-sub">模块 01 视频系列</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-3xl mx-auto font-light leading-relaxed">
+                    Explore Module 01 in more depth through a structured video series designed to reinforce the core ideas, frameworks and actions introduced in the session.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 items-start">
+                <!-- Left rail -->
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="series-panel p-8 bg-[#081b27]">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-10 h-10 rounded-full bg-accent/15 text-accent flex items-center justify-center">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <h3 class="text-2xl font-700">Session Objectives</h3>
+                        </div>
+
+                        <ul class="space-y-4 text-gray-300 font-light leading-relaxed">
+                            <li class="flex gap-3">
+                                <i class="fa-solid fa-check text-accent mt-1"></i>
+                                <span>Define the role of a manager at Dragonpass.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <i class="fa-solid fa-check text-accent mt-1"></i>
+                                <span>Articulate what it means, and what it looks like, to behave like a leader at Dragonpass.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <i class="fa-solid fa-check text-accent mt-1"></i>
+                                <span>Set clear expectations that are calibrated to the individual needs of each team member.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <i class="fa-solid fa-check text-accent mt-1"></i>
+                                <span>Conduct an effective one-to-one that creates opportunities to strengthen engagement and performance.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="series-panel p-8">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-10 h-10 rounded-full bg-accent/15 text-accent flex items-center justify-center">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-2xl font-700">Series Progress</h3>
+                        </div>
+
+                        <div class="mb-5">
+                            <div class="progress-pill">
+                                <i class="fa-solid fa-circle-play text-accent"></i>
+                                <span id="progress-summary">0 of 10 videos opened</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <button id="resume-video-btn" class="resume-btn hidden">
+                                <i class="fa-solid fa-play mr-2"></i>
+                                Continue where you left off
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="series-panel p-8">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-10 h-10 rounded-full bg-accent/15 text-accent flex items-center justify-center">
+                                <i class="fa-solid fa-link"></i>
+                            </div>
+                            <h3 class="text-2xl font-700">Additional Resources</h3>
+                        </div>
+
+                        <div class="space-y-4">
+                            <a
+                                href="https://dragonpassuk.sharepoint.com/sites/LeadershipPerformance/SitePages/L%26P_Con_Leadership%20Expectations.aspx"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="resource-link"
+                            >
+                                <span class="resource-link__icon"><i class="fa-solid fa-compass"></i></span>
+                                <span>
+                                    <span class="block text-white font-medium">Leadership Expectations</span>
+                                    <span class="block text-gray-400 text-sm font-light">Reference page for expected leadership behaviours and standards.</span>
+                                </span>
+                            </a>
+
+                            <a
+                                href="https://dragonpassuk-my.sharepoint.com/:b:/g/personal/gareth_ogden_dragonpass_com/IQAXqR34ZEAsQbupRmL1tgxtAfK8FEdnmBH0YfuiO4Q_vw4?e=VX5Huo"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="resource-link"
+                            >
+                                <span class="resource-link__icon"><i class="fa-solid fa-file-lines"></i></span>
+                                <span>
+                                    <span class="block text-white font-medium">Programme White Paper</span>
+                                    <span class="block text-gray-400 text-sm font-light">Supporting context and background for the broader bootcamp design.</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main video area -->
+                <div class="lg:col-span-2">
+                    <div class="series-panel overflow-hidden">
+                        <div class="px-8 py-6 bg-[#081b27] border-b border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div>
+                                <h3 class="text-2xl font-700 text-accent">Module 01: Foundations of Leadership</h3>
+                                <p class="text-gray-400 font-light mt-2">Select a video to open it in-page and continue through the series at your own pace.</p>
+                            </div>
+                            <div class="text-xs uppercase tracking-[0.3em] text-white/30 font-semibold">
+                                10 videos
+                            </div>
+                        </div>
+
+                        <div class="p-6 md:p-8 bg-[#06131c]">
+                            <div class="grid md:grid-cols-2 gap-5">
+                                <button class="video-card" data-video-id="video-1" data-video-title="Welcome to the Bootcamp" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQC0E5FMsepqTJCBpvYe4D06ATbsvfTAHs0vH1PcdGztaLE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ZjTnab">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Series opener</span>
+                                    </span>
+                                    <span class="video-card__title">Welcome to the Bootcamp</span>
+                                    <span class="video-card__desc">Introduction to the bootcamp structure and an overview of the content covered across all three modules.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card" data-video-id="video-2" data-video-title="Manager vs Leader" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQBBdg8YF8nQSa3Jnnw1zAIuAe8mVESYNQ_wpRRQ0BuFHXY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=7oeqwc">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Core concept</span>
+                                    </span>
+                                    <span class="video-card__title">Manager vs Leader</span>
+                                    <span class="video-card__desc">Exploring the distinction between managing and leading, and why that matters from the outset.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card" data-video-id="video-3" data-video-title="The Triangle of Expectations" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQBuYLFuaDFgR6CkesiG80qdAchugEePDPP0RzXH90dpSf0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=lvKPwp">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Framework overview</span>
+                                    </span>
+                                    <span class="video-card__title">The Triangle of Expectations</span>
+                                    <span class="video-card__desc">Introducing the core framework for Module 01, designed to help managers define and organise what good looks like.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card sub-video" data-video-id="video-4" data-video-title="Target Expectations" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQC0TY8TDHB1QrEURIsztzUhAYdKkKLvRERQ-80FOjfDKTI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=8WSVNT">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Triangle series</span>
+                                    </span>
+                                    <span class="video-card__title">Target Expectations</span>
+                                    <span class="video-card__desc">A closer look at the part of the framework focused on mid- to long-term goals, including OKRs.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card sub-video" data-video-id="video-5" data-video-title="Operating Expectations" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQDo7tGyRbKJRZsKbBf89Wp9AYzPbpqFaIV3RvUo98cLbnk?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=rDHCi5">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Triangle series</span>
+                                    </span>
+                                    <span class="video-card__title">Operating Expectations</span>
+                                    <span class="video-card__desc">Exploring the always-on standards that shape consistency, quality and day-to-day performance.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card sub-video" data-video-id="video-6" data-video-title="Managing with AI" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQB8E9BNHv5eRKDzkZfgRow8ATIpVk2YdWTezr-8OppQJFw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=971X5R">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Triangle series</span>
+                                    </span>
+                                    <span class="video-card__title">Managing with AI</span>
+                                    <span class="video-card__desc">A practical look at how AI can be integrated into management practice in a useful, responsible and effective way.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card sub-video" data-video-id="video-7" data-video-title="Task-Based Expectations" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQBnDiG6oarQQI6k2PA0f-k5AVPDGSL4AFBp9YwwHeCSer4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=hRZe2v">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Triangle series</span>
+                                    </span>
+                                    <span class="video-card__title">Task-Based Expectations</span>
+                                    <span class="video-card__desc">Completing the framework with a focus on daily directives and how managers can define required actions clearly.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card" data-video-id="video-8" data-video-title="One-to-Ones" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQAMqVNvru4RRIZCJwAkDY4aAfsMN3cIKH34WdA5qOa289A?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DGllw0">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Performance in practice</span>
+                                    </span>
+                                    <span class="video-card__title">One-to-Ones</span>
+                                    <span class="video-card__desc">Bringing the module together through one of the most effective mechanisms for driving engagement and performance.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card" data-video-id="video-9" data-video-title="Post-Course Actions" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQDTtVl_3WEtQpb2koqwPR66AYntIkGSxOg46tE6nfvca-A?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=SSxAbr">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Follow-through</span>
+                                    </span>
+                                    <span class="video-card__title">Post-Course Actions</span>
+                                    <span class="video-card__desc">An overview of the post-course work, why it matters, and how managers can support participants afterwards.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+
+                                <button class="video-card" data-video-id="video-10" data-video-title="Close" data-video-url="https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQDRvjHDMZ5gRrMei3viEjqcAVSU3kXFTrzvFcKR_Ve_eks?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=tLcZAG">
+                                    <span class="video-card__top">
+                                        <span class="video-card__icon"><i class="fa-solid fa-play"></i></span>
+                                        <span class="video-card__meta">Series close</span>
+                                    </span>
+                                    <span class="video-card__title">Close</span>
+                                    <span class="video-card__desc">A short conclusion to the Module 01 video series.</span>
+                                    <span class="video-card__status"><i class="fa-regular fa-circle"></i> Not started</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. The Delivery Structure -->
+    <section id="structure" class="py-32 px-6 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-20 text-center">
+                <h2 class="text-4xl font-800 mb-4 tracking-tight">The Delivery Structure <span class="cn-sub">交付结构</span></h2>
+                <p class="text-gray-400 font-light max-w-2xl mx-auto">An iterative sprint model designed to ensure activation, not just attendance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div class="lg:col-span-9">
+                    <div class="sprint-container h-full">
+                        <div id="cycle-badge" class="cycle-badge uppercase">Cycle 1 / 3</div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="structure-card" id="phase-1">
+                                <div class="text-accent font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 01</div>
+                                <h4 class="font-700 text-lg mb-2">Pre-Learning</h4>
+                                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">Introduction of content and baseline capability diagnostics.</p>
+                                <div class="text-[10px] font-bold text-gray-500 uppercase mt-auto">20-30 Mins</div>
+                            </div>
+                            <div class="structure-card" id="phase-2">
+                                <div class="text-accent font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 02</div>
+                                <h4 class="font-700 text-lg mb-2">Workshop</h4>
+                                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">High-intensity in-person sessions to build management skills.</p>
+                                <div class="text-[10px] font-bold text-gray-500 uppercase mt-auto">2 Days</div>
+                            </div>
+                            <div class="structure-card" id="phase-3">
+                                <div class="text-accent font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 03</div>
+                                <h4 class="font-700 text-lg mb-2">Activation (PCA)</h4>
+                                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">Structured real-world experiences to provide evidence of activation.</p>
+                                <div class="text-[10px] font-bold text-gray-500 uppercase mt-auto">3 Cycles</div>
+                            </div>
+                        </div>
+                        <div class="progress-track"><div id="progress-bar"></div></div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <div class="structure-card border-white/20 flex flex-col" id="phase-4">
+                        <div class="text-gray-500 font-bold text-[10px] tracking-widest mb-4 uppercase">Phase 04</div>
+                        <h4 class="font-700 text-lg mb-2">Validation</h4>
+                        <p class="text-[11px] text-gray-400 leading-relaxed mb-4">Final assessment and production of Completion Report for the organisation.</p>
+                        <div class="text-[10px] font-bold text-gray-600 uppercase mt-auto">Milestone</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Delivery DNA -->
+    <section id="delivery" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-800 mb-16 text-center tracking-tight">The Delivery DNA <span class="cn-sub">项目核心基因</span></h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 border-t border-white/10 flex gap-6">
+                    <div class="text-accent text-2xl pt-1"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">AI-Driven Workflows</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Proprietary Prompt Libraries to help managers build bespoke performance standards in real-time.</p>
+                    </div>
+                </div>
+                <div class="p-8 border-t border-white/10 flex gap-6">
+                    <div class="text-accent text-2xl pt-1"><i class="fa-solid fa-flask"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">Research-Led Analysis</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Grounded in data, evidence-based diagnostics, and 13-page maturity reports.</p>
+                    </div>
+                </div>
+                <div class="p-8 border-t border-white/10 flex gap-6">
+                    <div class="text-accent text-2xl pt-1"><i class="fa-solid fa-comments"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">Language Immersion</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">PCA ensure managers don't just learn theory—they apply the language in their daily remit.</p>
+                    </div>
+                </div>
+                <div class="p-8 border-t border-white/10 flex gap-6">
+                    <div class="text-accent text-2xl pt-1"><i class="fa-solid fa-rocket"></i></div>
+                    <div>
+                        <h4 class="font-700 mb-2 text-lg">The Performance Catalyst</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Positioning the manager as the primary catalyst for high performance across the entire organisation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-24 px-6 text-center border-t border-white/10">
+        <img src="https://lh3.googleusercontent.com/d/1vpIwCYBeUexg-kAbqLLRV5_j23dIRRDM" alt="Logo" class="h-12 mx-auto mb-10 opacity-90">
+        <p class="text-gray-400 text-lg md:text-xl mb-4 font-light italic max-w-3xl mx-auto leading-relaxed">
+            "We provide the craft. You provide the discipline. Being good at this is a choice you make every day: be the manager they <span class="text-white font-semibold">want</span> to work for - not the one they <span class="text-white font-semibold">have</span> to."
+        </p>
+        <p class="text-xs text-white/20 mb-12 font-light tracking-widest">
+            我们提供方法，你贡献自律。卓越是一种每日的抉择：做员工向往的领导者，而非他们不得不追随的管理者。
+        </p>
+        <div class="w-16 h-1 bg-accent mx-auto mb-10"></div>
+        <p class="text-[10px] text-gray-500 uppercase tracking-[0.4em] font-bold">Built by Dragonpass Global Leadership & Performance</p>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal hidden" aria-hidden="true">
+        <div class="video-modal__backdrop"></div>
+        <div class="video-modal__dialog">
+            <div class="video-modal__header">
+                <div>
+                    <div class="text-xs uppercase tracking-[0.25em] text-white/30 font-semibold mb-2">Module 01</div>
+                    <h3 id="video-modal-title" class="text-2xl font-700">Video title</h3>
+                </div>
+                <button id="video-modal-close" class="video-modal__close" aria-label="Close video">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="video-modal__body">
+                <div class="video-embed-wrap">
+                    <iframe
+                        id="video-modal-frame"
+                        src=""
+                        title="Module 01 video"
+                        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                <div class="modal-actions">
+                    <a id="open-video-new-tab" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn modal-btn--primary">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        Open in new tab
+                    </a>
+                    <button id="mark-complete-btn" class="modal-btn modal-btn--secondary" type="button">
+                        <i class="fa-solid fa-check"></i>
+                        Mark as viewed
+                    </button>
+                    <button id="play-next-btn" class="modal-btn modal-btn--secondary" type="button">
+                        <i class="fa-solid fa-forward-step"></i>
+                        Next video
+                    </button>
+                </div>
+
+                <p class="text-sm text-gray-500 mt-4 font-light">
+                    SharePoint and OneDrive video links do not always allow embedded playback in every environment. If a video does not load inside the page, use the direct link above to open it in a new tab.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Scrubber
+        const slider = document.getElementById('impact-slider');
+        const stats = [
+            { el: document.getElementById('stat-1'), max: 69 },
+            { el: document.getElementById('stat-2'), max: 75 },
+            { el: document.getElementById('stat-3'), max: 50 }
+        ];
+
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value / 100;
+            stats.forEach(s => s.el.innerText = Math.floor(s.max * val) + '%');
+        });
+
+        // 2. Iterative Structure Logic
+        const progressBar = document.getElementById('progress-bar');
+        const cycleBadge = document.getElementById('cycle-badge');
+        const phases = [document.getElementById('phase-1'), document.getElementById('phase-2'), document.getElementById('phase-3')];
+        const phase4 = document.getElementById('phase-4');
+
+        ScrollTrigger.create({
+            trigger: "#structure",
+            start: "top 40%",
+            end: "bottom 60%",
+            scrub: 1,
+            onUpdate: (self) => {
+                const p = self.progress;
+                if (p < 0.8) {
+                    const loopProgress = (p / 0.8) * 3;
+                    const currentCycle = Math.floor(loopProgress) + 1;
+                    const cycleP = (loopProgress % 1) * 100;
+                    if (currentCycle <= 3) {
+                        cycleBadge.innerText = `Cycle ${currentCycle} / 3`;
+                        progressBar.style.width = cycleP + '%';
+                        phases.forEach((card, i) => {
+                            const threshold = (i / phases.length) * 100;
+                            card.classList.toggle('active-card', cycleP > threshold);
+                        });
+                        phase4.classList.remove('active-card');
+                    }
+                } else {
+                    cycleBadge.innerText = "Sprints Complete";
+                    progressBar.style.width = "100%";
+                    phases.forEach(card => card.classList.remove('active-card'));
+                    phase4.classList.add('active-card');
+                }
+            }
+        });
+
+        // 3. Module 01 Video Series
+        const VIDEO_SERIES = [
+            {
+                id: 'video-1',
+                title: 'Welcome to the Bootcamp',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQC0E5FMsepqTJCBpvYe4D06ATbsvfTAHs0vH1PcdGztaLE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ZjTnab'
+            },
+            {
+                id: 'video-2',
+                title: 'Manager vs Leader',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQBBdg8YF8nQSa3Jnnw1zAIuAe8mVESYNQ_wpRRQ0BuFHXY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=7oeqwc'
+            },
+            {
+                id: 'video-3',
+                title: 'The Triangle of Expectations',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQBuYLFuaDFgR6CkesiG80qdAchugEePDPP0RzXH90dpSf0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=lvKPwp'
+            },
+            {
+                id: 'video-4',
+                title: 'Target Expectations',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQC0TY8TDHB1QrEURIsztzUhAYdKkKLvRERQ-80FOjfDKTI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=8WSVNT'
+            },
+            {
+                id: 'video-5',
+                title: 'Operating Expectations',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQDo7tGyRbKJRZsKbBf89Wp9AYzPbpqFaIV3RvUo98cLbnk?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=rDHCi5'
+            },
+            {
+                id: 'video-6',
+                title: 'Managing with AI',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQB8E9BNHv5eRKDzkZfgRow8ATIpVk2YdWTezr-8OppQJFw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=971X5R'
+            },
+            {
+                id: 'video-7',
+                title: 'Task-Based Expectations',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQBnDiG6oarQQI6k2PA0f-k5AVPDGSL4AFBp9YwwHeCSer4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=hRZe2v'
+            },
+            {
+                id: 'video-8',
+                title: 'One-to-Ones',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQAMqVNvru4RRIZCJwAkDY4aAfsMN3cIKH34WdA5qOa289A?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DGllw0'
+            },
+            {
+                id: 'video-9',
+                title: 'Post-Course Actions',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQDTtVl_3WEtQpb2koqwPR66AYntIkGSxOg46tE6nfvca-A?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=SSxAbr'
+            },
+            {
+                id: 'video-10',
+                title: 'Close',
+                url: 'https://dragonpassuk-my.sharepoint.com/:v:/g/personal/gareth_ogden_dragonpass_com/IQDRvjHDMZ5gRrMei3viEjqcAVSU3kXFTrzvFcKR_Ve_eks?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=tLcZAG'
+            }
+        ];
+
+        const modal = document.getElementById('video-modal');
+        const modalTitle = document.getElementById('video-modal-title');
+        const modalFrame = document.getElementById('video-modal-frame');
+        const closeBtn = document.getElementById('video-modal-close');
+        const resumeBtn = document.getElementById('resume-video-btn');
+        const openVideoNewTab = document.getElementById('open-video-new-tab');
+        const markCompleteBtn = document.getElementById('mark-complete-btn');
+        const playNextBtn = document.getElementById('play-next-btn');
+        const videoCards = document.querySelectorAll('.video-card');
+        const progressSummary = document.getElementById('progress-summary');
+
+        const LAST_VIDEO_KEY = 'dragonpass-module01-last-video';
+        const WATCHED_KEY = 'dragonpass-module01-watched';
+        let currentVideoId = null;
+
+        function getWatchedVideos() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(WATCHED_KEY));
+                return Array.isArray(saved) ? saved : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveWatchedVideos(ids) {
+            localStorage.setItem(WATCHED_KEY, JSON.stringify(ids));
+        }
+
+        function markVideoWatched(id) {
+            const watched = getWatchedVideos();
+            if (!watched.includes(id)) {
+                watched.push(id);
+                saveWatchedVideos(watched);
+            }
+            updateWatchedState();
+        }
+
+        function updateWatchedState() {
+            const watched = getWatchedVideos();
+
+            videoCards.forEach(card => {
+                const statusEl = card.querySelector('.video-card__status');
+                const cardId = card.dataset.videoId;
+
+                if (watched.includes(cardId)) {
+                    card.classList.add('is-watched');
+                    if (statusEl) {
+                        statusEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Viewed';
+                    }
+                } else {
+                    card.classList.remove('is-watched');
+                    if (statusEl) {
+                        statusEl.innerHTML = '<i class="fa-regular fa-circle"></i> Not started';
+                    }
+                }
+            });
+
+            progressSummary.textContent = `${watched.length} of ${VIDEO_SERIES.length} videos opened`;
+        }
+
+        function toSharePointEmbedUrl(url) {
+            try {
+                const cleanUrl = url.split('?')[0];
+                const base = cleanUrl.replace('/:_layouts/15/Doc.aspx', '');
+                return `${base}?embed=1`;
+            } catch (e) {
+                return url;
+            }
+        }
+
+        function normaliseVideoUrl(url) {
+            if (!url) return '';
+
+            if (url.includes('youtube.com/watch?v=')) {
+                const videoId = new URL(url).searchParams.get('v');
+                return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+            }
+
+            if (url.includes('youtu.be/')) {
+                const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+                return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+            }
+
+            if (url.includes('vimeo.com/') && !url.includes('player.vimeo.com')) {
+                const match = url.match(/vimeo\.com\/(\d+)/);
+                return match ? `https://player.vimeo.com/video/${match[1]}` : url;
+            }
+
+            if (url.includes('sharepoint.com') || url.includes('sharepoint-df.com')) {
+                return toSharePointEmbedUrl(url);
+            }
+
+            if (url.includes('onedrive.live.com') || url.includes('my.sharepoint.com')) {
+                return `${url}${url.includes('?') ? '&' : '?'}embed=1
